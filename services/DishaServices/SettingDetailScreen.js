@@ -25,12 +25,6 @@ const SettingDetailScreen = ({ route }) => {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: '#ECECEC', alignItems: 'center' }}>
-            <View style={styles.header}>
-                <TouchableOpacity style={styles.iconButton} onPress={() => navigation.goBack()}>
-                    <Ionicons name="chevron-back" size={24} color="#000" />
-                </TouchableOpacity>
-                <Text style={{ fontSize: 24, color: '#000' }}>{name}</Text>
-            </View>
             <View style={styles.container}>
                 {name === 'User Details' && (<UserDetails user={user} />)}
                 {name === 'Change Password' && (<ChangePassword />)}
@@ -44,27 +38,6 @@ const SettingDetailScreen = ({ route }) => {
 export default SettingDetailScreen
 
 const styles = StyleSheet.create({
-    header: {
-        position: 'absolute',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingHorizontal: 20,
-        width: width,
-        ...Platform.select({
-            ios: {
-                paddingTop: 20,
-                top: 50,
-            },
-            android: {
-                paddingTop: 30,
-                top: 30,
-            },
-        }),
-        paddingBottom: 20,
-        borderRadius: 40,
-        paddingRight: 50,
-    },
     iconButton: {
         backgroundColor: '#fff',
         padding: 15,
@@ -77,8 +50,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
         paddingTop: 10,
-        paddingHorizontal: 20,
-        marginTop: 100,
+        paddingHorizontal: 10,
         width: '90%',
         borderRadius: 20,
         padding: 20

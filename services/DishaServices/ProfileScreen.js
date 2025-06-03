@@ -21,58 +21,12 @@ const ProfileScreen = () => {
     }
 
     const scrollY = useRef(new Animated.Value(0)).current;
-    const headerTranslate = scrollY.interpolate({
-        inputRange: [0, 100],
-        outputRange: [0, -230],
-        extrapolate: 'clamp',
-    });
-
-    const headerOpacity = scrollY.interpolate({
-        inputRange: [0, 100],
-        outputRange: [1, 0],
-        extrapolate: 'clamp',
-    });
-
-    const headerScale = scrollY.interpolate({
-        inputRange: [0, 90],
-        outputRange: [1, 0.6],
-        extrapolate: 'clamp',
-    });
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#008B8B' }}>
-            <Animated.View
-                style={[
-                    styles.header,
-                    {
-                        transform: [{ translateY: headerTranslate }, { scale: headerScale }],
-                        opacity: headerOpacity,
-                        zIndex: 1000, // keep on top
-                    },
-                ]}
-                pointerEvents="box-none"
-            >
-
-                {/* <TouchableOpacity style={styles.iconButton}>
-                    <Ionicons name="chevron-back" size={24} color="#000" />
-                </TouchableOpacity> */}
-                <View></View>
-
-                <TouchableOpacity style={styles.iconButton} onPress={() => navigateToSettings()}>
-                    <Ionicons name="settings-outline" size={24} color="#000" />
-                </TouchableOpacity>
-            </Animated.View>
-            <Animated.ScrollView
-                contentContainerStyle={styles.container}
-                onScroll={Animated.event(
-                    [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-                    { useNativeDriver: true }
-                )}
-                scrollEventThrottle={16}
-            >
-
-                <View style={styles.body}>
-                    {/* Avatar */}
+        <ScrollView
+            contentContainerStyle={styles.container}>
+            <View style={styles.body}>
+                <View style={styles.topBox}>
                     <View style={styles.avatar}>
                         <Avatar
                             size={100}
@@ -83,30 +37,40 @@ const ProfileScreen = () => {
                         />
                     </View>
 
-                    <View style={{ marginTop: 50 }}></View>
-
                     <View style={styles.detailsBox}>
-                        <View style={styles.detailsBoxLeft}>
-                            <Text style={styles.texts}>Athreya</Text>
-                            <Text style={styles.texts}>akondiathreya@gmail.com</Text>
-                        </View>
-                        <View style={styles.detailsBoxRight}>
-                            <Text style={styles.texts}>+91 9491728563</Text>
-                            <Text style={styles.texts}>Male - 22</Text>
-                        </View>
-                    </View>
-
-                    <View style={styles.contactsBox}>
-                        <View style={{ marginBottom: 10 }}>
-                            <Text style={{ fontSize: 22, fontWeight: 'bold' }}>Emergency Contacts</Text>
-                        </View>
-                        {Array.from({ length: 4 }).map((_, index) => (
-                            <ContactCard key={index} />
-                        ))}
+                        <Text style={styles.texts}>Athreya</Text>
+                        <Text style={styles.texts}>akondiathreya@gmail.com</Text>
+                        <Text style={styles.texts}>+91 9491728563</Text>
+                        <Text style={styles.texts}>Male - 22</Text>
                     </View>
                 </View>
-            </Animated.ScrollView>
-        </SafeAreaView>
+
+                <View style={styles.contactsBox}>
+                    <View style={{ marginBottom: 10 }}>
+                        <Text style={{ fontSize: 22, fontWeight: 'bold' }}>Emergency Contacts</Text>
+                    </View>
+                    {Array.from({ length: 4 }).map((_, index) => (
+                        <ContactCard key={index} />
+                    ))}
+                </View>
+                <TouchableOpacity onPress={navigateToSettings} style={{ alignItems: 'center', marginTop: 20 }}>
+                    <BlurView
+                        intensity={100}
+                        style={{
+                            width: width - 30,
+                            padding: 15,
+                            borderRadius: 20,
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                        }}
+                    >
+                        <Text style={styles.text2}>Settings</Text>
+                        <Ionicons name="settings-outline" size={24} color="#fff" />
+                    </BlurView>
+                </TouchableOpacity>
+            </View>
+        </ScrollView>
     )
 }
 
@@ -114,30 +78,6 @@ export default ProfileScreen
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#008B8B',
-        marginTop: 160,
-        borderRadius: 40,
-    },
-    header: {
-        backgroundColor: '#008B8B',
-        position: 'absolute',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingHorizontal: 20,
-        width: width,
-        ...Platform.select({
-            ios: {
-                paddingTop: 20,
-                top: 50,
-            },
-            android: {
-                paddingTop: 30,
-                top: 30,
-            },
-        }),
-        paddingBottom: 20,
-        borderRadius: 40,
     },
     iconButton: {
         backgroundColor: '#fff',
@@ -157,33 +97,22 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         paddingBottom: 20,
         paddingHorizontal: 15,
-        position: 'relative',
         paddingBottom: 200,
     },
+    topBox: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingLeft: 20
+    },
     avatar: {
-        position: 'absolute',
-        top: -50,
-        ...Platform.select({
-            ios: {
-                left: '10%'
-            },
-            android: {
-                left: '10%'
-            },
-        }),
         borderRadius: 100,
         borderWidth: 2,
+        width: 105,
     },
     detailsBox: {
         padding: 10,
-        flexDirection: 'row',
         justifyContent: 'space-between',
-    },
-    detailsBoxLeft: {
-
-    },
-    detailsBoxRight: {
-
     },
     texts: {
         color: '#000',
@@ -203,5 +132,14 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginVertical: 4,
         marginLeft: 10,
+    },
+    text2: {
+        color: '#000',
+        fontSize: 16,
+        marginVertical: 4,
+        marginLeft: 10,
+        backgroundColor: 'red',
+        padding: 10,
+        borderRadius: 10,
     },
 })
