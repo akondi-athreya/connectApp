@@ -169,16 +169,16 @@ const FeaturesScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View>
       <StatusBar
         barStyle="light-content"
         backgroundColor="transparent"
         translucent={true}
       />
       <ScrollView contentContainerStyle={[styles.scrollContent, { paddingBottom: 100 }]}>
-        <View style={styles.header}>
+        {/* <View style={styles.header}>
           <Text style={styles.headerTitle}>Disha Emergency Services</Text>
-        </View>
+        </View> */}
 
         <View style={styles.mapContainer}>
           {loading ? (
@@ -252,7 +252,7 @@ const FeaturesScreen = () => {
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

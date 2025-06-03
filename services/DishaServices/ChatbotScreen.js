@@ -346,9 +346,9 @@ const ChatbotScreen = ({ username = 'User' }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <Text style={styles.headerText}>Safety Assistant</Text>
-      </View>
+      </View> */}
       {renderCurrentStep()}
     </SafeAreaView>
   );

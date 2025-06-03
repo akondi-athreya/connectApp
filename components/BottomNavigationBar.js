@@ -416,10 +416,9 @@ const BottomNavigationBar = ({ activeTab, onTabPress }) => {
         </TouchableOpacity>
       </View>
 
-      {/* Progress Indicator */}
-      <View style={styles.progressContainer}>
+      {/* <View style={styles.progressContainer}>
         <View style={styles.progressBar}></View>
-      </View>
+      </View> */}
 
       {/* Emergency Stop Modal */}
       <Modal

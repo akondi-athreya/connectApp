@@ -149,11 +149,11 @@ const bulletPoints = [
         barStyle="light-content" 
       />
       
-      <SafeAreaView style={styles.safeAreaTop} />
-      <SafeAreaView style={styles.safeAreaBottom}>
-        <View style={styles.header}>
+      <View  />
+      <View style={styles.safeAreaBottom}>
+        {/* <View style={styles.header}>
           <Text style={styles.headerTitle}>Disha Emergency Services</Text>
-        </View>
+        </View> */}
 
         <ScrollView 
           style={styles.scrollView} 
@@ -303,7 +303,7 @@ const bulletPoints = [
             </TouchableOpacity>
           </View>
         </Modal>
-      </SafeAreaView>
+      </View>
     </>
   );
 };
